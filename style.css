@@ -2167,3 +2167,350 @@ textarea{
     height:min(56vh,420px);
   }
 }
+
+
+/* =========================
+   FINAL CROSS-PAGE MICRO POLISH
+   Visual-only override layer
+   ========================= */
+
+:root{
+  --page-hero-max: 980px;
+  --hero-panel-bg: linear-gradient(180deg, rgba(8,12,18,.52), rgba(8,12,18,.24));
+  --hero-panel-border: 1px solid rgba(255,255,255,.08);
+  --hero-panel-shadow: 0 20px 48px rgba(0,0,0,.30);
+}
+
+/* safer text widths */
+.hero-content,
+.page-hero-inner,
+.showcase-copy,
+.about-card,
+.card-body,
+.page-contact-card,
+.info-chip{
+  min-width: 0;
+}
+
+.hero-content > *:last-child,
+.page-hero-inner > *:last-child,
+.showcase-copy > *:last-child,
+.about-card > *:last-child,
+.card-body > *:last-child{
+  margin-bottom: 0;
+}
+
+/* premium rhythm */
+.container h2{
+  margin-bottom: var(--space-5);
+}
+
+#dynamicContentSection > h2,
+#aboutSection h2,
+#eventSection h2,
+#teamSection h2,
+#bottomSection h2{
+  margin-bottom: var(--space-4);
+}
+
+.hero-content,
+.page-hero-inner{
+  background: var(--hero-panel-bg);
+  border: var(--hero-panel-border);
+  box-shadow: var(--hero-panel-shadow);
+}
+
+.hero-content{
+  width: min(100%, var(--page-hero-max));
+}
+
+.page-hero-inner{
+  width: min(100%, var(--page-hero-max));
+}
+
+.hero h1,
+.page-hero h1{
+  letter-spacing: -.035em;
+}
+
+.hero p,
+.page-hero p{
+  max-width: 760px;
+}
+
+.home-eyebrow,
+.rentals-eyebrow,
+.projects-eyebrow,
+.property-eyebrow,
+.contact-eyebrow,
+.team-eyebrow,
+.completed-projects-eyebrow{
+  margin: 0 0 var(--space-3);
+  color: rgba(255,255,255,.72);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.home-hero{
+  min-height: clamp(560px, 88vh, 860px);
+  align-items: center;
+}
+
+.home-hero-content{
+  padding: var(--space-7) var(--space-6);
+}
+
+.home-hero-actions{
+  justify-content: center;
+  margin-top: var(--space-5);
+}
+
+.info-strip{
+  position: relative;
+  margin-top: calc(var(--space-6) * -1);
+  z-index: 4;
+}
+
+.info-strip-inner{
+  position: relative;
+  z-index: 1;
+}
+
+.page-contact-band{
+  position: relative;
+  margin-top: calc(var(--space-5) * -1);
+  z-index: 4;
+}
+
+.page-contact-grid{
+  align-items: stretch;
+}
+
+.page-contact-card,
+.info-chip{
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.page-contact-card strong,
+.info-chip a,
+.info-chip p{
+  line-height: 1.45;
+}
+
+.page-contact-card.hidden{
+  display: none !important;
+}
+
+/* Page specific hero tuning */
+.rentals-hero,
+.projects-hero,
+.contact-hero,
+.team-hero,
+.completed-projects-hero{
+  min-height: 360px;
+  padding-bottom: var(--space-7);
+}
+
+.property-hero{
+  min-height: clamp(360px, 48vw, 560px);
+}
+
+.rentals-hero-inner,
+.projects-hero-inner,
+.contact-hero-inner,
+.team-hero-inner,
+.completed-projects-hero-inner,
+.property-hero-inner{
+  max-width: 920px;
+}
+
+.rentals-subtitle,
+.projects-subtitle{
+  max-width: 720px;
+}
+
+.rentals-contact-band,
+.projects-contact-band,
+.property-contact-band,
+.contact-contact-band,
+.team-contact-band,
+.completed-projects-contact-band{
+  margin-top: calc(var(--space-6) * -1);
+}
+
+/* remove floating duplication from property page follow-up strip if any extra brand image remains */
+.property-brand-strip{
+  display: none;
+}
+
+/* cards and sections */
+.card,
+.showcase-copy,
+.about-card,
+.team-profile-form,
+.team-admin-item,
+.feed-item,
+.stack-item,
+.social-post{
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.showcase-copy,
+.about-card{
+  height: 100%;
+}
+
+.showcase-gallery > *{
+  min-width: 0;
+}
+
+/* buttons stay consistent inside stacked areas */
+.contact-actions .btn,
+.card-actions .btn,
+.list-page-switch .btn{
+  min-height: 46px;
+}
+
+/* forms */
+form .btn,
+#contactForm .btn{
+  margin-top: var(--space-4);
+}
+
+/* CTA polish */
+.cta{
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(157,78,221,.12), transparent 28%),
+    linear-gradient(135deg, rgba(255,255,255,.03), transparent 42%);
+  pointer-events:none;
+}
+
+.cta > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* team cards */
+.team-card .card-body,
+.team-grid .card .card-body{
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* sticky call / footer coexistence */
+.sticky-call{
+  bottom: 78px;
+}
+
+@media (max-width: 900px){
+  .sticky-call{
+    bottom: 88px;
+  }
+}
+
+/* footer tag should not dominate */
+.ora-footer-tag{
+  opacity: .96;
+}
+
+.ora-footer-tag:hover{
+  opacity: 1;
+}
+
+/* Better desktop nav balance */
+@media (min-width: 901px){
+  .nav{
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .nav-links{
+    gap: 20px;
+  }
+}
+
+/* responsive tune */
+@media (max-width: 900px){
+  .home-hero{
+    min-height: auto;
+  }
+
+  .home-hero-content,
+  .page-hero-inner{
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .rentals-hero,
+  .projects-hero,
+  .contact-hero,
+  .team-hero,
+  .completed-projects-hero{
+    min-height: 320px;
+  }
+
+  .page-contact-band,
+  .rentals-contact-band,
+  .projects-contact-band,
+  .property-contact-band,
+  .contact-contact-band,
+  .team-contact-band,
+  .completed-projects-contact-band{
+    margin-top: calc(var(--space-5) * -1);
+  }
+}
+
+@media (max-width: 640px){
+  .home-hero-content,
+  .page-hero-inner{
+    padding: var(--space-5);
+  }
+
+  .home-eyebrow,
+  .rentals-eyebrow,
+  .projects-eyebrow,
+  .property-eyebrow,
+  .contact-eyebrow,
+  .team-eyebrow,
+  .completed-projects-eyebrow{
+    letter-spacing: .14em;
+  }
+
+  .hero-brand{
+    margin-bottom: var(--space-4);
+  }
+
+  .rentals-hero,
+  .projects-hero,
+  .contact-hero,
+  .team-hero,
+  .completed-projects-hero{
+    min-height: 280px;
+    padding-bottom: var(--space-6);
+  }
+
+  .page-contact-band,
+  .rentals-contact-band,
+  .projects-contact-band,
+  .property-contact-band,
+  .contact-contact-band,
+  .team-contact-band,
+  .completed-projects-contact-band{
+    margin-top: calc(var(--space-4) * -1);
+  }
+
+  .cta{
+    padding: var(--space-7) var(--space-4);
+  }
+}
