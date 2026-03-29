@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@supabase/ssr": "^0.9.0",
+    "@supabase/supabase-js": "^2.100.1"
+  },
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "check:js": "node --check admin.html.js && node --check index.html.js && node --check rentals.html.js && node --check property.html.js && node --check projects.html.js && node --check completed-projects.html.js && node --check team.html.js && node --check contact.html.js && node --check shared-api.js && node --check api/login.js && node --check api/logout.js && node --check api/session.js && node --check api/site-data.js && node --check api/upload.js"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "rentals": [
+    {
+      "id": "unit1",
+      "title": "Baltic Unit",
+      "description": "Fresh renovation, modern finish",
+      "details": "Fully renovated unit with updated flooring, kitchen, and fixtures. Designed for comfort and long-term living.",
+      "images": [
+        "assets/rentals/unit1-1.jpg",
+        "assets/rentals/unit1-2.jpg"
+      ],
+      "available": true,
+      "price": "",
+      "location": "Baltic, PEI",
+      "featured": true
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj1",
+      "title": "Full Interior Renovation",
+      "description": "Complete gut and rebuild",
+      "details": "Full demolition and rebuild including kitchen, flooring, drywall, and finishing work.",
+      "images": [
+        "assets/projects/project1-before.jpg",
+        "assets/projects/project1-after.jpg"
+      ],
+      "status": "in-progress"
+    }
+  ],
+  "content": [],
+  "settings": {
+    "heroTitle": "Powers Construction & Properties",
+    "heroSubtitle": "Renovations \u2022 Builds \u2022 Property Management",
+    "primaryPhone": "(902) 432-4571",
+    "secondaryPhone": "",
+    "email": "dustinpowers719@gmail.com",
+    "location": "Baltic, PEI",
+    "aboutTitle": "About Powers Construction",
+    "aboutBody": "Local construction and property work handled directly, with straight answers, reliable timelines, and quality work that lasts.",
+    "aboutImage": "assets/branding/banner-main.png",
+    "eventTitle": "Featured Event / Update",
+    "eventBody": "Show current work, announcements, or seasonal updates here from the admin page.",
+    "eventImages": [
+      "assets/branding/banner-alt.png"
+    ],
+    "bottomTitle": "More From Powers Construction",
+    "bottomBody": "Upload more homepage images here to fill the lower section of the main page.",
+    "bottomImages": [
+      "assets/branding/banner-main.png",
+      "assets/branding/banner-alt.png"
+    ],
+    "teamTitle": "",
+    "teamBody": "",
+    "teamProfiles": [],
+    "secondaryEmail": "",
+    "showPrimaryPhone": true,
+    "showSecondaryPhone": false,
+    "showEmail": true,
+    "showSecondaryEmail": false,
+    "showLocation": true,
+    "showEventSection": false,
+    "showTeamSection": false
+  }
+}

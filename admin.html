@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Powers Admin Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <style>
+    :root{
+      --admin-bg:#0b1120;
+      --admin-panel:#111a2e;
+      --admin-panel-2:#16223a;
+      --admin-border:rgba(255,255,255,.08);
+      --admin-muted:#94a3b8;
+      --admin-text:#e5eefc;
+      --admin-accent:#f7b955;
+      --admin-success:#3dd68c;
+      --admin-danger:#ef6f6c;
+      --admin-shadow:0 20px 40px rgba(0,0,0,.25);
+      --admin-radius:22px;
+    }
+    body.admin-body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,#07101d 0%,#0b1120 100%);color:var(--admin-text);min-height:100vh;}
+    .admin-body .nav,.admin-body .hero,.admin-body .page-contact-band{display:none;}
+    .admin-shell-redesign{max-width:1500px;margin:0 auto;padding:24px 18px 40px;}
+    .admin-topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:18px;flex-wrap:wrap;}
+    .admin-brandbar{display:flex;align-items:center;gap:14px;}
+    .admin-logo{width:52px;height:52px;border-radius:16px;background:#fff;padding:8px;object-fit:contain;box-shadow:var(--admin-shadow);}
+    .admin-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--admin-muted);}
+    .admin-title{margin:2px 0 0;font-size:30px;line-height:1.1;}
+    .admin-top-actions{display:flex;gap:10px;flex-wrap:wrap;}
+    .admin-btn{appearance:none;border:none;border-radius:14px;padding:12px 16px;font-weight:700;font-size:14px;cursor:pointer;transition:.18s ease;display:inline-flex;align-items:center;gap:8px;text-decoration:none;}
+    .admin-btn:hover{transform:translateY(-1px);}
+    .admin-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+    .admin-btn.primary{background:var(--admin-accent);color:#111827;box-shadow:0 10px 24px rgba(247,185,85,.22);}
+    .admin-btn.secondary{background:rgba(255,255,255,.06);color:var(--admin-text);border:1px solid var(--admin-border);}
+    .admin-btn.ghost{background:transparent;color:var(--admin-text);border:1px dashed var(--admin-border);}
+    .admin-btn.danger{background:rgba(239,111,108,.14);color:#ffd2d1;border:1px solid rgba(239,111,108,.28);}
+    .admin-login-wrap{max-width:460px;margin:8vh auto 0;}
+    .admin-login-card,.admin-panel,.admin-metric,.admin-card-nav{background:rgba(17,26,46,.94);backdrop-filter:blur(16px);border:1px solid var(--admin-border);box-shadow:var(--admin-shadow);border-radius:var(--admin-radius);}
+    .admin-login-card{padding:30px;}
+    .admin-login-card h1{margin:12px 0 8px;font-size:30px;}
+    .admin-subtext{color:var(--admin-muted);}
+    .admin-form-grid{display:grid;gap:14px;}
+    .admin-field label,.admin-switch-row .admin-field-label{display:block;font-size:13px;font-weight:700;color:#d4ddf0;margin-bottom:8px;}
+    .admin-input,.admin-textarea,.admin-select{width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(3,8,20,.5);padding:13px 14px;color:var(--admin-text);font:inherit;outline:none;}
+    .admin-input:focus,.admin-textarea:focus,.admin-select:focus{border-color:rgba(247,185,85,.6);box-shadow:0 0 0 4px rgba(247,185,85,.12);}
+    .admin-textarea{min-height:120px;resize:vertical;}
+    .admin-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;align-items:start;}
+    .admin-sidebar{display:grid;gap:14px;position:sticky;top:18px;}
+    .admin-status-chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;background:rgba(255,255,255,.05);border:1px solid var(--admin-border);color:var(--admin-muted);}
+    .admin-card-nav{padding:10px;}
+    .admin-nav-button{width:100%;text-align:left;border:none;background:transparent;color:var(--admin-text);padding:16px;border-radius:18px;cursor:pointer;display:grid;gap:4px;border:1px solid transparent;}
+    .admin-nav-button:hover{background:rgba(255,255,255,.03);}
+    .admin-nav-button.active{background:linear-gradient(180deg,rgba(247,185,85,.18),rgba(247,185,85,.08));border-color:rgba(247,185,85,.28);}
+    .admin-nav-button strong{font-size:15px;}
+    .admin-nav-button span{font-size:12px;color:var(--admin-muted);}
+    .admin-main{display:grid;gap:18px;}
+    .admin-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+    .admin-metric{padding:18px;}
+    .admin-metric h3{font-size:13px;color:var(--admin-muted);margin:0 0 10px;}
+    .admin-metric strong{font-size:30px;}
+    .admin-panel{padding:18px;}
+    .admin-panel-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px;}
+    .admin-panel-head h2{margin:0;font-size:24px;}
+    .admin-panel-head p{margin:6px 0 0;color:var(--admin-muted);}
+    .admin-panel-toolbar{display:flex;gap:10px;flex-wrap:wrap;}
+    .admin-layout-2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:18px;}
+    .admin-stack{display:grid;gap:16px;}
+    .admin-section-card{background:rgba(255,255,255,.025);border:1px solid var(--admin-border);border-radius:18px;padding:16px;}
+    .admin-section-card h3{margin:0 0 14px;font-size:17px;}
+    .admin-inline-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+    .admin-inline-grid.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .admin-actions-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+    .admin-library{display:grid;gap:12px;max-height:72vh;overflow:auto;padding-right:4px;}
+    .admin-list-card{background:rgba(255,255,255,.03);border:1px solid var(--admin-border);border-radius:18px;padding:14px;display:grid;gap:10px;}
+    .admin-list-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;}
+    .admin-list-actions{display:flex;gap:8px;flex-wrap:wrap;}
+    .admin-meta{display:flex;gap:8px;flex-wrap:wrap;}
+    .admin-pill{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(255,255,255,.05);color:var(--admin-muted);}
+    .admin-pill.success{background:rgba(61,214,140,.14);color:#bff7d8;}
+    .admin-pill.warning{background:rgba(247,185,85,.14);color:#ffdb98;}
+    .admin-preview-grid,.admin-uploader-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;}
+    .admin-image-tile{position:relative;border:1px solid var(--admin-border);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.04);min-height:120px;}
+    .admin-image-tile img{width:100%;height:120px;object-fit:cover;display:block;}
+    .admin-image-tile-footer{padding:8px 10px;display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:11px;color:var(--admin-muted);}
+    .admin-image-remove{border:none;background:rgba(239,111,108,.16);color:#ffd2d1;border-radius:999px;padding:6px 10px;cursor:pointer;font-weight:700;}
+    .admin-switch-list{display:grid;gap:10px;}
+    .admin-switch-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px;background:rgba(255,255,255,.025);border:1px solid var(--admin-border);border-radius:16px;}
+    .admin-switch{position:relative;width:48px;height:28px;display:inline-block;}
+    .admin-switch input{opacity:0;width:0;height:0;}
+    .admin-slider{position:absolute;inset:0;border-radius:999px;background:#334155;transition:.2s;}
+    .admin-slider:before{content:"";position:absolute;width:20px;height:20px;left:4px;top:4px;border-radius:50%;background:#fff;transition:.2s;}
+    .admin-switch input:checked + .admin-slider{background:var(--admin-accent);}
+    .admin-switch input:checked + .admin-slider:before{transform:translateX(20px);}
+    .admin-validation{font-size:12px;color:#ffb4b4;min-height:18px;}
+    .admin-empty{padding:18px;border:1px dashed var(--admin-border);border-radius:16px;color:var(--admin-muted);text-align:center;}
+    .admin-toolbar-note{font-size:12px;color:var(--admin-muted);}
+    .admin-modal{position:fixed;inset:0;background:rgba(3,8,20,.72);display:none;align-items:center;justify-content:center;padding:20px;z-index:50;}
+    .admin-modal.open{display:flex;}
+    .admin-modal-card{width:min(980px,100%);max-height:88vh;overflow:auto;background:#0f172a;border-radius:24px;border:1px solid var(--admin-border);box-shadow:var(--admin-shadow);padding:20px;}
+    .admin-dropzone{border:1.5px dashed rgba(247,185,85,.38);background:rgba(247,185,85,.06);border-radius:18px;padding:22px;text-align:center;color:#ffe2b0;}
+    .admin-dropzone input{display:none;}
+    .admin-statusbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+    .admin-toast-wrap{position:fixed;right:18px;bottom:18px;display:grid;gap:10px;z-index:70;}
+    .admin-toast{padding:14px 16px;border-radius:16px;background:#0f172a;border:1px solid var(--admin-border);box-shadow:var(--admin-shadow);min-width:280px;}
+    .admin-toast.success{border-color:rgba(61,214,140,.35);}
+    .admin-toast.error{border-color:rgba(239,111,108,.35);}
+    .admin-hidden{display:none !important;}
+    @media (max-width:1180px){
+      .admin-grid,.admin-layout-2{grid-template-columns:1fr;}
+      .admin-sidebar{position:static;}
+      .admin-overview{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+    @media (max-width:760px){
+      .admin-shell-redesign{padding:16px 12px 28px;}
+      .admin-title{font-size:24px;}
+      .admin-overview,.admin-inline-grid,.admin-inline-grid.three{grid-template-columns:1fr;}
+      .admin-topbar,.admin-panel-head,.admin-list-head{align-items:stretch;}
+      .admin-top-actions,.admin-panel-toolbar,.admin-actions-row,.admin-list-actions{width:100%;}
+      .admin-btn{justify-content:center;width:100%;}
+    }
+  </style>
+</head>
+<body class="admin-body">
+  <div class="admin-shell-redesign">
+    <div id="authGate" class="admin-login-wrap">
+      <div class="admin-login-card">
+        <div class="admin-brandbar">
+          <img src="assets/branding/logo.png" alt="Powers brand" class="admin-logo"/>
+          <div>
+            <div class="admin-kicker">Secure admin</div>
+            <h1>Powers Content Studio</h1>
+          </div>
+        </div>
+        <p class="admin-subtext">Fast operator workspace for homepage, rentals, projects, and property content. Login is required before any live-linked save or upload action.</p>
+        <form id="loginForm" class="admin-form-grid">
+          <div class="admin-field">
+            <label for="username">Username</label>
+            <input id="username" class="admin-input" autocomplete="username" required placeholder="Enter username"/>
+          </div>
+          <div class="admin-field">
+            <label for="password">Password</label>
+            <input id="password" class="admin-input" autocomplete="current-password" required type="password" placeholder="Enter password"/>
+          </div>
+          <div class="admin-actions-row">
+            <button class="admin-btn primary" type="submit">Log In</button>
+          </div>
+          <div id="loginError" class="admin-validation"></div>
+        </form>
+      </div>
+    </div>
+
+    <div id="appShell" class="admin-hidden">
+      <div class="admin-topbar">
+        <div class="admin-brandbar">
+          <img src="assets/branding/logo.png" alt="Powers brand" class="admin-logo"/>
+          <div>
+            <div class="admin-kicker">Admin control panel</div>
+            <h1 class="admin-title">Powers Content Studio</h1>
+            <div class="admin-subtext">Quick-switch workspaces with direct publishing to live site destinations.</div>
+          </div>
+        </div>
+        <div class="admin-top-actions">
+          <a class="admin-btn secondary" href="index.html">View Home</a>
+          <a class="admin-btn secondary" href="rentals.html">View Rentals</a>
+          <a class="admin-btn secondary" href="projects.html">View Projects</a>
+          <button id="refreshButton" class="admin-btn ghost" type="button">Refresh Data</button>
+          <button id="logoutButton" class="admin-btn danger" type="button">Log Out</button>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <aside class="admin-sidebar">
+          <div class="admin-card-nav">
+            <div class="admin-statusbar">
+              <div class="admin-status-chip">Live-linked saves</div>
+              <div id="saveHealth" class="admin-status-chip">Ready</div>
+            </div>
+            <button class="admin-nav-button active" type="button" data-workspace="dashboard">
+              <strong>Dashboard</strong>
+              <span>Counts, health, and quick jump controls</span>
+            </button>
+            <button class="admin-nav-button" type="button" data-workspace="homepage">
+              <strong>Homepage</strong>
+              <span>Hero, contact, about, event, bottom, team</span>
+            </button>
+            <button class="admin-nav-button" type="button" data-workspace="rentals">
+              <strong>Rentals</strong>
+              <span>Listings, availability, featured, galleries</span>
+            </button>
+            <button class="admin-nav-button" type="button" data-workspace="projects">
+              <strong>Projects</strong>
+              <span>Before/after stories and gallery media</span>
+            </button>
+            <button class="admin-nav-button" type="button" data-workspace="content">
+              <strong>Property & Site Pages</strong>
+              <span>Legacy site-controlled supporting content</span>
+            </button>
+            <button class="admin-nav-button" type="button" data-workspace="uploader">
+              <strong>Media Uploader</strong>
+              <span>Single reusable upload system</span>
+            </button>
+          </div>
+        </aside>
+
+        <main class="admin-main">
+          <section class="admin-workspace" data-workspace-panel="dashboard">
+            <div class="admin-overview" id="dashboardMetrics"></div>
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <div>
+                  <h2>Publishing health</h2>
+                  <p>Everything here maps directly to the data contract used by the public pages.</p>
+                </div>
+              </div>
+              <div class="admin-layout-2">
+                <div class="admin-stack">
+                  <div class="admin-section-card">
+                    <h3>Live data destinations</h3>
+                    <div class="admin-inline-grid">
+                      <div class="admin-list-card"><strong>Homepage</strong><span class="admin-subtext">settings → index.html</span></div>
+                      <div class="admin-list-card"><strong>Rentals page</strong><span class="admin-subtext">rentals[] → rentals.html</span></div>
+                      <div class="admin-list-card"><strong>Property detail pages</strong><span class="admin-subtext">rentals[id] → property.html?id=...</span></div>
+                      <div class="admin-list-card"><strong>Projects page</strong><span class="admin-subtext">projects[] → projects.html</span></div>
+                    </div>
+                  </div>
+                  <div class="admin-section-card">
+                    <h3>Operator notes</h3>
+                    <ul class="admin-subtext">
+                      <li>Every save writes through the same site-data API and updates browser cache only as a fallback.</li>
+                      <li>The uploader is reused across rentals, projects, homepage sections, and team profiles.</li>
+                      <li>Success and failure states are explicit. There are no fake save banners.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="admin-section-card">
+                  <h3>Recent status</h3>
+                  <div id="recentStatus" class="admin-library"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-workspace admin-hidden" data-workspace-panel="homepage">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <div>
+                  <h2>Homepage workspace</h2>
+                  <p>Grouped editing for hero, contact, supporting sections, and team profiles.</p>
+                </div>
+                <div class="admin-panel-toolbar">
+                  <button class="admin-btn secondary" type="button" id="homeResetButton">Reset form</button>
+                  <button class="admin-btn primary" type="button" id="homeSaveButton">Save homepage</button>
+                </div>
+              </div>
+              <div class="admin-layout-2">
+                <div class="admin-stack">
+                  <div class="admin-section-card">
+                    <h3>Hero and contact</h3>
+                    <div class="admin-inline-grid">
+                      <div class="admin-field"><label for="settingHeroTitle">Hero title</label><input id="settingHeroTitle" class="admin-input"/></div>
+                      <div class="admin-field"><label for="settingHeroSubtitle">Hero subtitle</label><input id="settingHeroSubtitle" class="admin-input"/></div>
+                      <div class="admin-field"><label for="settingPrimaryPhone">Primary phone</label><input id="settingPrimaryPhone" class="admin-input"/></div>
+                      <div class="admin-field"><label for="settingSecondaryPhone">Secondary phone</label><input id="settingSecondaryPhone" class="admin-input"/></div>
+                      <div class="admin-field"><label for="settingEmail">Primary email</label><input id="settingEmail" class="admin-input"/></div>
+                      <div class="admin-field"><label for="settingSecondaryEmail">Secondary email</label><input id="settingSecondaryEmail" class="admin-input"/></div>
+                      <div class="admin-field"><label for="settingLocation">Location</label><input id="settingLocation" class="admin-input"/></div>
+                    </div>
+                    <div class="admin-switch-list" style="margin-top:14px;">
+                      <div class="admin-switch-row"><div class="admin-field-label">Show primary phone</div><label class="admin-switch"><input id="showPrimaryPhone" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Show secondary phone</div><label class="admin-switch"><input id="showSecondaryPhone" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Show primary email</div><label class="admin-switch"><input id="showEmail" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Show secondary email</div><label class="admin-switch"><input id="showSecondaryEmail" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Show location</div><label class="admin-switch"><input id="showLocation" type="checkbox"/><span class="admin-slider"></span></label></div>
+                    </div>
+                  </div>
+
+                  <div class="admin-section-card">
+                    <h3>Homepage sections</h3>
+                    <div class="admin-switch-list">
+                      <div class="admin-switch-row"><div class="admin-field-label">Show About section</div><label class="admin-switch"><input id="showAboutSection" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Show Event section</div><label class="admin-switch"><input id="showEventSection" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Show Bottom section</div><label class="admin-switch"><input id="showBottomSection" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Show Team section</div><label class="admin-switch"><input id="showTeamSection" type="checkbox"/><span class="admin-slider"></span></label></div>
+                    </div>
+                  </div>
+
+                  <div class="admin-section-card">
+                    <h3>About section</h3>
+                    <div class="admin-field"><label for="settingAboutTitle">Heading</label><input id="settingAboutTitle" class="admin-input"/></div>
+                    <div class="admin-field"><label for="settingAboutBody">Text</label><textarea id="settingAboutBody" class="admin-textarea"></textarea></div>
+                    <div class="admin-actions-row">
+                      <button class="admin-btn secondary" type="button" data-upload-target="homepageAboutImage">Manage about image</button>
+                    </div>
+                    <div id="homepageAboutPreview" class="admin-preview-grid"></div>
+                  </div>
+
+                  <div class="admin-section-card">
+                    <h3>Event section</h3>
+                    <div class="admin-field"><label for="settingEventTitle">Heading</label><input id="settingEventTitle" class="admin-input"/></div>
+                    <div class="admin-field"><label for="settingEventBody">Text</label><textarea id="settingEventBody" class="admin-textarea"></textarea></div>
+                    <div class="admin-actions-row">
+                      <button class="admin-btn secondary" type="button" data-upload-target="homepageEventImages">Manage event images</button>
+                    </div>
+                    <div id="homepageEventPreview" class="admin-preview-grid"></div>
+                  </div>
+
+                  <div class="admin-section-card">
+                    <h3>Bottom section</h3>
+                    <div class="admin-field"><label for="settingBottomTitle">Heading</label><input id="settingBottomTitle" class="admin-input"/></div>
+                    <div class="admin-field"><label for="settingBottomBody">Text</label><textarea id="settingBottomBody" class="admin-textarea"></textarea></div>
+                    <div class="admin-actions-row">
+                      <button class="admin-btn secondary" type="button" data-upload-target="homepageBottomImages">Manage bottom images</button>
+                    </div>
+                    <div id="homepageBottomPreview" class="admin-preview-grid"></div>
+                  </div>
+                </div>
+
+                <div class="admin-stack">
+                  <div class="admin-section-card">
+                    <div class="admin-panel-head" style="margin-bottom:12px;">
+                      <div>
+                        <h3 style="margin:0;">Team profiles</h3>
+                        <p class="admin-subtext">This panel feeds the homepage team section directly.</p>
+                      </div>
+                    </div>
+                    <div class="admin-stack">
+                      <div class="admin-field"><label for="settingTeamTitle">Section heading</label><input id="settingTeamTitle" class="admin-input"/></div>
+                      <div class="admin-field"><label for="settingTeamBody">Section intro</label><textarea id="settingTeamBody" class="admin-textarea"></textarea></div>
+                      <div class="admin-field"><label for="teamName">Name</label><input id="teamName" class="admin-input"/></div>
+                      <div class="admin-field"><label for="teamRole">Role</label><input id="teamRole" class="admin-input"/></div>
+                      <div class="admin-field"><label for="teamBio">Bio</label><textarea id="teamBio" class="admin-textarea"></textarea></div>
+                      <div class="admin-actions-row">
+                        <button class="admin-btn secondary" type="button" data-upload-target="teamProfilePhoto">Manage profile photo</button>
+                        <button class="admin-btn secondary" type="button" id="teamResetButton">Clear form</button>
+                        <button class="admin-btn primary" type="button" id="teamSaveButton">Add team profile</button>
+                      </div>
+                      <div id="teamPhotoPreview" class="admin-preview-grid"></div>
+                    </div>
+                  </div>
+                  <div class="admin-section-card">
+                    <h3>Saved team profiles</h3>
+                    <div id="teamProfilesAdmin" class="admin-library"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-workspace admin-hidden" data-workspace-panel="rentals">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <div>
+                  <h2>Rentals workspace</h2>
+                  <p>Create or edit rental listings that publish to both rentals and property detail pages.</p>
+                </div>
+                <div class="admin-panel-toolbar">
+                  <button class="admin-btn secondary" type="button" id="rentalResetButton">New rental</button>
+                  <button class="admin-btn primary" type="button" id="rentalSaveButton">Save rental</button>
+                </div>
+              </div>
+              <div class="admin-layout-2">
+                <div class="admin-stack">
+                  <div class="admin-section-card">
+                    <h3>Rental editor</h3>
+                    <div class="admin-inline-grid">
+                      <div class="admin-field"><label for="rentalId">Rental / property id</label><input id="rentalId" class="admin-input" placeholder="baltic-unit-a"/></div>
+                      <div class="admin-field"><label for="rentalTitle">Headline</label><input id="rentalTitle" class="admin-input"/></div>
+                      <div class="admin-field"><label for="rentalLocation">Location</label><input id="rentalLocation" class="admin-input"/></div>
+                      <div class="admin-field"><label for="rentalPrice">Price</label><input id="rentalPrice" class="admin-input" placeholder="$1,500/mo"/></div>
+                    </div>
+                    <div class="admin-field"><label for="rentalDescription">Description</label><textarea id="rentalDescription" class="admin-textarea"></textarea></div>
+                    <div class="admin-field"><label for="rentalDetails">Extra details</label><textarea id="rentalDetails" class="admin-textarea"></textarea></div>
+                    <div class="admin-inline-grid">
+                      <div class="admin-switch-row"><div class="admin-field-label">Available</div><label class="admin-switch"><input id="rentalAvailable" type="checkbox"/><span class="admin-slider"></span></label></div>
+                      <div class="admin-switch-row"><div class="admin-field-label">Featured on homepage</div><label class="admin-switch"><input id="rentalFeatured" type="checkbox"/><span class="admin-slider"></span></label></div>
+                    </div>
+                    <div class="admin-field" style="margin-top:14px;">
+                      <label>Included amenities</label>
+                      <div id="rentalAmenities" class="admin-inline-grid three"></div>
+                    </div>
+                    <div class="admin-actions-row">
+                      <button class="admin-btn secondary" type="button" data-upload-target="rentalUploads">Manage rental images</button>
+                    </div>
+                    <div id="rentalImagePreview" class="admin-preview-grid"></div>
+                    <div id="rentalValidation" class="admin-validation"></div>
+                  </div>
+                </div>
+                <div class="admin-section-card">
+                  <h3>Saved rentals</h3>
+                  <div id="rentalsList" class="admin-library"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-workspace admin-hidden" data-workspace-panel="projects">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <div>
+                  <h2>Projects workspace</h2>
+                  <p>Manage before-and-after projects and project gallery images.</p>
+                </div>
+                <div class="admin-panel-toolbar">
+                  <button class="admin-btn secondary" type="button" id="projectResetButton">New project</button>
+                  <button class="admin-btn primary" type="button" id="projectSaveButton">Save project</button>
+                </div>
+              </div>
+              <div class="admin-layout-2">
+                <div class="admin-stack">
+                  <div class="admin-section-card">
+                    <h3>Project editor</h3>
+                    <div class="admin-inline-grid">
+                      <div class="admin-field"><label for="projectId">Project id</label><input id="projectId" class="admin-input" placeholder="kitchen-renovation"/></div>
+                      <div class="admin-field"><label for="projectTitle">Title</label><input id="projectTitle" class="admin-input"/></div>
+                    </div>
+                    <div class="admin-field"><label for="projectDescription">Description</label><textarea id="projectDescription" class="admin-textarea"></textarea></div>
+                    <div class="admin-field"><label for="projectDetails">Details</label><textarea id="projectDetails" class="admin-textarea"></textarea></div>
+                    <div class="admin-field"><label for="projectStatus">Status</label>
+                      <select id="projectStatus" class="admin-select">
+                        <option value="completed">Completed</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="planned">Planned</option>
+                      </select>
+                    </div>
+                    <div class="admin-actions-row">
+                      <button class="admin-btn secondary" type="button" data-upload-target="projectBeforeImage">Before image</button>
+                      <button class="admin-btn secondary" type="button" data-upload-target="projectAfterImage">After image</button>
+                      <button class="admin-btn secondary" type="button" data-upload-target="projectGalleryImages">Gallery images</button>
+                    </div>
+                    <div class="admin-stack">
+                      <div><div class="admin-toolbar-note">Before</div><div id="projectBeforePreview" class="admin-preview-grid"></div></div>
+                      <div><div class="admin-toolbar-note">After</div><div id="projectAfterPreview" class="admin-preview-grid"></div></div>
+                      <div><div class="admin-toolbar-note">Gallery</div><div id="projectGalleryPreview" class="admin-preview-grid"></div></div>
+                    </div>
+                    <div id="projectValidation" class="admin-validation"></div>
+                  </div>
+                </div>
+                <div class="admin-section-card">
+                  <h3>Saved projects</h3>
+                  <div id="projectsList" class="admin-library"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-workspace admin-hidden" data-workspace-panel="content">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <div>
+                  <h2>Property and site pages</h2>
+                  <p>Legacy supporting content entries stored in <code>data.content</code> and mapped by target page.</p>
+                </div>
+                <div class="admin-panel-toolbar">
+                  <button class="admin-btn secondary" type="button" id="contentResetButton">New entry</button>
+                  <button class="admin-btn primary" type="button" id="contentSaveButton">Save entry</button>
+                </div>
+              </div>
+              <div class="admin-layout-2">
+                <div class="admin-stack">
+                  <div class="admin-section-card">
+                    <h3>Page entry editor</h3>
+                    <div class="admin-inline-grid">
+                      <div class="admin-field"><label for="contentTarget">Target page</label>
+                        <select id="contentTarget" class="admin-select">
+                          <option value="home">Home</option>
+                          <option value="rentals">Rentals</option>
+                          <option value="property">Property detail</option>
+                          <option value="projects">Projects</option>
+                          <option value="contact">Contact</option>
+                          <option value="team">Team</option>
+                        </select>
+                      </div>
+                      <div class="admin-field"><label for="contentStatus">Status</label>
+                        <select id="contentStatus" class="admin-select">
+                          <option value="published">Published</option>
+                          <option value="draft">Draft</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="admin-field"><label for="contentTitle">Headline</label><input id="contentTitle" class="admin-input"/></div>
+                    <div class="admin-field"><label for="contentBody">Body</label><textarea id="contentBody" class="admin-textarea"></textarea></div>
+                    <div class="admin-field"><label for="contentDetails">Extra details</label><textarea id="contentDetails" class="admin-textarea"></textarea></div>
+                    <div id="contentValidation" class="admin-validation"></div>
+                  </div>
+                </div>
+                <div class="admin-section-card">
+                  <h3>Saved page entries</h3>
+                  <div id="contentList" class="admin-library"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-workspace admin-hidden" data-workspace-panel="uploader">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <div>
+                  <h2>Unified media uploader</h2>
+                  <p>One uploader system reused everywhere. Pick a destination, upload, preview, then attach to the right content block.</p>
+                </div>
+                <div class="admin-panel-toolbar">
+                  <button class="admin-btn primary" type="button" id="openUploaderButton">Open uploader</button>
+                </div>
+              </div>
+              <div class="admin-layout-2">
+                <div class="admin-section-card">
+                  <h3>How it works</h3>
+                  <ol class="admin-subtext">
+                    <li>Select a workspace target such as rental gallery, project before image, event images, or team profile photo.</li>
+                    <li>Upload one or many images through the shared flow.</li>
+                    <li>The uploader posts every file through the same upload API and returns a saved URL.</li>
+                    <li>Returned image URLs are attached to the correct in-memory draft field, then persisted on save.</li>
+                  </ol>
+                </div>
+                <div class="admin-section-card">
+                  <h3>Available targets</h3>
+                  <div id="uploaderTargets" class="admin-library"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="uploaderModal" class="admin-modal" aria-hidden="true">
+      <div class="admin-modal-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Media uploader</h2>
+            <p id="uploaderSubtitle">Upload to a selected destination.</p>
+          </div>
+          <div class="admin-panel-toolbar">
+            <button class="admin-btn secondary" type="button" id="uploaderCloseButton">Close</button>
+            <button class="admin-btn primary" type="button" id="uploaderAttachButton">Attach uploaded media</button>
+          </div>
+        </div>
+        <div class="admin-stack">
+          <div class="admin-field">
+            <label for="uploaderTargetSelect">Attach to</label>
+            <select id="uploaderTargetSelect" class="admin-select"></select>
+          </div>
+          <label class="admin-dropzone" for="uploaderInput">
+            <strong>Choose images</strong>
+            <div class="admin-subtext">Multiple files are supported where the target allows it.</div>
+            <input id="uploaderInput" type="file" accept="image/*" multiple/>
+          </label>
+          <div id="uploaderFeedback" class="admin-validation"></div>
+          <div id="uploaderQueue" class="admin-uploader-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toastWrap" class="admin-toast-wrap"></div>
+  </div>
+
+  <script src="shared-api.js"></script>
+  <script src="admin.html.js"></script>
+</body>
+</html>

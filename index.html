@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Powers Construction &amp; Properties</title>
+<link href="style.css" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+</head>
+<body>
+<div class="nav">
+<a aria-label="Powers home" class="logo-wrap" href="index.html">
+<img alt="Powers Construction &amp; Properties logo" class="logo-img" src="assets/branding/logo.png"/>
+</a>
+<button aria-controls="siteNav" aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<div class="nav-links" id="siteNav"><a href="index.html">Home</a><a href="rentals.html">Rentals</a><a href="projects.html">Projects</a><a href="admin.html">Admin</a></div>
+</div>
+<div class="hero home-hero">
+<div class="hero-content">
+<img alt="Powers brand" class="hero-brand" src="assets/branding/logo-horizontal.png"/>
+<h1 id="heroTitle">Powers Construction &amp; Properties</h1>
+<p id="heroSubtitle">Renovations • Builds • Property Management</p>
+<div style="margin-top:20px;">
+<a class="btn" href="rentals.html">View Rentals</a>
+<a class="btn secondary" href="projects.html">View Work</a>
+</div>
+</div>
+</div>
+<section class="info-strip">
+<div class="info-strip-inner">
+<div class="info-chip" id="primaryPhoneChip">
+<strong>Call</strong>
+<a href="tel:+19024324571" id="primaryPhoneLink">(902) 432-4571</a>
+</div>
+<div class="info-chip" id="secondaryPhoneChip">
+<strong>Second Number</strong>
+<a href="tel:+19024324571" id="secondaryPhoneLink">(902) 432-4571</a>
+</div>
+<div class="info-chip" id="emailChip">
+<strong>Email</strong>
+<a href="mailto:dustinpowers719@gmail.com" id="emailLink">dustinpowers719@gmail.com</a>
+</div>
+<div class="info-chip" id="secondaryEmailChip">
+<strong>Second Email</strong>
+<a href="mailto:" id="secondaryEmailLink">Add second email</a>
+</div>
+<div class="info-chip" id="locationChip">
+<strong>Location</strong>
+<p id="locationText">Baltic, PEI</p>
+</div>
+</div>
+</section>
+<div class="container">
+<h2>Why Choose Powers Construction</h2>
+<div class="grid">
+<div class="card"><div class="card-body"><h3>Built Right</h3><p>No shortcuts. Every job done properly.</p></div></div>
+<div class="card"><div class="card-body"><h3>Reliable</h3><p>Shows up. Gets it done. No runaround.</p></div></div>
+<div class="card"><div class="card-body"><h3>Full Service</h3><p>From demo to finish — everything handled.</p></div></div>
+</div>
+</div>
+
+<div class="container">
+<h2>Featured Rentals</h2>
+<div class="grid" id="featured"></div>
+</div>
+
+<div class="container" id="dynamicContentSection">
+<h2>Latest Updates</h2>
+<div id="dynamicContent"></div>
+</div>
+
+<div class="container" id="aboutSection">
+<div class="about-grid">
+<div class="showcase-copy about-card">
+<h2 id="aboutTitle">About Powers Construction</h2>
+<p id="aboutBody">Local construction and property work handled directly, with straight answers, reliable timelines, and quality work that lasts.</p>
+<div class="contact-actions">
+<a class="btn" href="tel:+19024324571" id="aboutCallBtn">Call Now</a>
+<a class="btn secondary" href="mailto:dustinpowers719@gmail.com" id="aboutEmailBtn">Email</a>
+</div>
+</div>
+<div id="aboutImageWrap">
+<img alt="Powers Construction and Properties" class="about-photo" id="aboutImage" src="assets/branding/banner-main.png"/>
+</div>
+</div>
+</div>
+
+
+
+<div class="container" id="eventSection">
+<div class="showcase-copy">
+<h2 id="eventTitle">Featured Event / Update</h2>
+<p id="eventBody">Show current work, announcements, or seasonal updates here from the admin page.</p>
+</div>
+<div class="showcase-gallery section-spacer" id="eventGallery"></div>
+</div>
+
+<div class="container" id="teamSection">
+<div class="showcase-copy">
+<h2 id="teamTitle">Meet Our Team</h2>
+<p id="teamBody">The people behind the work.</p>
+</div>
+<div class="grid team-grid" id="teamGrid"></div>
+</div>
+
+<div class="container" id="bottomSection">
+<div class="showcase-copy">
+<h2 id="bottomTitle">More From Powers Construction</h2>
+<p id="bottomBody">Upload more homepage images here to fill the lower section of the main page.</p>
+</div>
+<div class="showcase-gallery section-spacer" id="bottomGallery"></div>
+</div>
+<div class="container">
+<h2>Contact Powers Construction</h2>
+<div class="card">
+<div class="card-body">
+<form action="mailto:dustinpowers719@gmail.com" enctype="text/plain" id="contactForm" method="post">
+<input name="name" placeholder="Name" required="" type="text"/>
+<input name="phone" placeholder="Phone" type="text"/>
+<textarea name="message" placeholder="What do you need done?" required=""></textarea>
+<button class="btn">Send Request</button>
+</form>
+</div>
+</div>
+</div>
+<div class="footer" id="footerText">Baltic, PEI • (902) 432-4571</div>
+<div class="ora-footer-tag">
+<a href="https://oradevelopmentspei.ca" rel="noopener noreferrer" target="_blank">Built and designed by ORA DEVELOPMENTSPEI</a>
+<a class="ora-inquire-link" href="mailto:jake.operationalrealityadvisors@gmail.com?subject=Website%20Inquiry">Inquire</a>
+</div>
+<script src="shared-api.js"></script><script src="index.html.js"></script></body>
+</html>
