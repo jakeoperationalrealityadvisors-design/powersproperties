@@ -74,7 +74,7 @@
 
 <link href="style.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="rentals-page">
 <!-- NAV -->
 <div class="nav">
 <a aria-label="Powers home" class="logo-wrap" href="index.html">
@@ -87,13 +87,17 @@
 </button>
 <div class="nav-links" id="siteNav"><a href="index.html">Home</a><a href="rentals.html">Rentals</a><a href="projects.html">Projects</a><a href="admin.html">Admin</a></div>
 </div>
+
 <!-- HERO -->
-<div class="hero small-hero page-hero modern-banner">
-<img alt="Powers brand" class="page-hero-brand" src="assets/branding/logo-horizontal.png"/>
-<h1>Available Rentals</h1>
-<p>Clean, reliable units ready when you are.</p>
+<div class="hero small-hero page-hero modern-banner rentals-hero">
+  <div class="page-hero-inner rentals-hero-inner">
+    <p class="rentals-eyebrow">Prince Edward Island Rentals</p>
+    <h1>Available Rentals</h1>
+    <p class="rentals-subtitle">Clean, reliable units with direct contact, clear details, and fast replies.</p>
+  </div>
 </div>
-<section class="page-contact-band">
+
+<section class="page-contact-band rentals-contact-band">
 <div class="container">
 <div class="page-contact-grid">
 <a class="page-contact-card" href="tel:+19024324571" id="globalPrimaryPhoneCard">
@@ -119,18 +123,22 @@
 </div>
 </div>
 </section>
+
 <!-- CONTENT -->
 <div class="container">
 <div class="grid" id="rentals"></div>
 </div>
+
 <!-- DYNAMIC CONTENT (ADMIN CONTROLLED) -->
 <div class="container" id="dynamicContent"></div>
+
 <!-- CTA -->
 <div class="cta">
 <h2>Need a place fast?</h2>
-<p>Call Dustin directly. No delays.</p>
+<p>Call Dustin directly for current availability and next steps.</p>
 <a class="btn" href="tel:+19024324571">📞 Call Now</a>
 </div>
+
 <div class="ora-footer-tag">
 <a href="https://oradevelopmentspei.ca" rel="noopener noreferrer" target="_blank">Built and designed by ORA DEVELOPMENTSPEI</a>
 <a class="ora-inquire-link" href="mailto:jake.operationalrealityadvisors@gmail.com?subject=Website%20Inquiry">Inquire</a>
