@@ -26,7 +26,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        "rounded-2xl font-semibold transition-all duration-200 flex items-center justify-center",
+        "className="px-5 py-2 rounded-2xl font-semibold bg-red-600 text-white",
         "focus:outline-none focus:ring-2 focus:ring-offset-2",
         
         // SIZE
