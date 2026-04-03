@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Powers Admin Studio</title>
+  <title>Powers Construction Admin</title>
   <meta name="description" content="Administrative login and content management interface for Powers Construction &amp; Properties."/>
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet"/>
   <meta name="theme-color" content="#0b1120"/>
@@ -12,7 +12,7 @@
 
 
   <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Powers Admin Studio"/>
+  <meta property="og:title" content="Powers Const. Admin"/>
   <meta property="og:description" content="Administrative login and content management interface for Powers Construction &amp; Properties."/>
   <meta property="og:url" content="https://powersproperties.vercel.app/admin.html"/>
   <meta property="og:site_name" content="Powers Construction &amp; Properties"/>
@@ -21,7 +21,7 @@
   <meta property="og:locale" content="en_CA"/>
 
   <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:title" content="Powers Admin Studio"/>
+  <meta name="twitter:title" content="Powers Construction Admin"/>
   <meta name="twitter:description" content="Administrative login and content management interface for Powers Construction &amp; Properties."/>
   <meta name="twitter:image" content="https://powersproperties.vercel.app/assets/branding/logo.png"/>
 
